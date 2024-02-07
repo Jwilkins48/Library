@@ -1,1 +1,2 @@
-<%= errMessage %>
+<!-- Check if error message is set before display -->
+<% if(locals.errorMessage != null){ %> <%= errorMessage %> <% } %>
