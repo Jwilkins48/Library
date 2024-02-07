@@ -1,6 +1,7 @@
 import expressEjsLayouts from "express-ejs-layouts";
 import indexRouter from "./routes/index.js";
 import authorRouter from "./routes/authors.js";
+import bookRouter from "./routes/books.js";
 import { fileURLToPath } from "url";
 import mongoose from "mongoose";
 import express from "express";
@@ -26,6 +27,7 @@ app.use(express.urlencoded({ limit: "10mb", extended: false }));
 // Routes
 app.use("/", indexRouter);
 app.use("/authors", authorRouter);
+app.use("/books", bookRouter);
 
 db.on("error", (error) => console.error(error));
 db.once("open", () => console.log("Connected to mongoose"));
