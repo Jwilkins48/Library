@@ -1,4 +1,7 @@
+import path from "path";
 import mongoose from "mongoose";
+
+export const coverImageBasePath = "uploads/bookCovers";
 
 const bookSchema = new mongoose.Schema({
   title: {
@@ -32,6 +35,13 @@ const bookSchema = new mongoose.Schema({
     ref: "Author",
     required: true,
   },
+});
+
+// Creating virtual property of joined path
+bookSchema.virtual("coverImagePath").get(function () {
+  if (this.coverImageName != null) {
+    return path.join("/", coverImageBasePath, this.coverImageName);
+  }
 });
 
 export default mongoose.model("Book", bookSchema);
