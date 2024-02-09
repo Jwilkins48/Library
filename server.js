@@ -1,6 +1,7 @@
 import expressEjsLayouts from "express-ejs-layouts";
-import indexRouter from "./routes/index.js";
 import authorRouter from "./routes/authors.js";
+import methodOverride from "method-override";
+import indexRouter from "./routes/index.js";
 import bookRouter from "./routes/books.js";
 import { fileURLToPath } from "url";
 import mongoose from "mongoose";
@@ -22,6 +23,7 @@ app.set("layout", "layouts/layout");
 
 app.use(expressEjsLayouts);
 app.use(express.static("public"));
+app.use(methodOverride("_method"));
 app.use(express.urlencoded({ limit: "10mb", extended: false }));
 
 // Routes
