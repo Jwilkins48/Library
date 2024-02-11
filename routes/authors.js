@@ -29,7 +29,7 @@ router.get("/new", (req, res) => {
   res.render("authors/newAuthor", { author: new Author() });
 });
 
-// Create new author
+// Create new author - POST
 router.post("/", async (req, res) => {
   const author = new Author({
     name: req.body.name,
@@ -37,6 +37,7 @@ router.post("/", async (req, res) => {
 
   try {
     const newAuthor = await author.save();
+    // Redirect to authors page
     res.redirect(`authors/${newAuthor.id}`);
   } catch (error) {
     res.render("authors/newAuthor", {
@@ -46,7 +47,7 @@ router.post("/", async (req, res) => {
   }
 });
 
-// Show author
+// Show author - /authors/:id
 router.get("/:id", async (req, res) => {
   try {
     const author = await Author.findById(req.params.id);
@@ -58,7 +59,7 @@ router.get("/:id", async (req, res) => {
   }
 });
 
-// Edit author
+// Edit author - /authors/:id/edit
 router.get("/:id/edit", async (req, res) => {
   try {
     const author = await Author.findById(req.params.id);
@@ -68,7 +69,7 @@ router.get("/:id/edit", async (req, res) => {
   }
 });
 
-// Update author
+// Update author - PUT
 router.put("/:id", async (req, res) => {
   let author;
   try {
@@ -88,7 +89,7 @@ router.put("/:id", async (req, res) => {
   }
 });
 
-// Delete author
+// Delete author - DELETE
 router.delete("/:id", async (req, res) => {
   let author;
   try {
